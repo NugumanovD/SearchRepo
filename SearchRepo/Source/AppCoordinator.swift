@@ -17,7 +17,7 @@ class AppCoordinator: BaseCoordinator {
     window.rootViewController = navigationController
     window.makeKeyAndVisible()
     
-    showRepositories()
+    showSignInFlow()
   }
   
 }

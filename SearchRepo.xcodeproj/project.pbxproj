@@ -30,6 +30,8 @@
 		3DF553372893E0A900F5D470 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553362893E0A900F5D470 /* HistoryViewModel.swift */; };
 		3DF553392893E0B000F5D470 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553382893E0B000F5D470 /* HistoryModel.swift */; };
 		3DF5533B2893E0BA00F5D470 /* HistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5533A2893E0BA00F5D470 /* HistoryCoordinator.swift */; };
+		3DF5533D289413BF00F5D470 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5533C289413BF00F5D470 /* NetworkManager.swift */; };
+		3DF5533F2894156C00F5D470 /* NetworkRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5533E2894156C00F5D470 /* NetworkRequestService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		3DF553362893E0A900F5D470 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		3DF553382893E0B000F5D470 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		3DF5533A2893E0BA00F5D470 /* HistoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCoordinator.swift; sourceTree = "<group>"; };
+		3DF5533C289413BF00F5D470 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3DF5533E2894156C00F5D470 /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,8 @@
 		3D6D0C792893C67D009BF5FC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3DF5533C289413BF00F5D470 /* NetworkManager.swift */,
+				3DF5533E2894156C00F5D470 /* NetworkRequestService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -293,11 +299,13 @@
 				3DF553352893E0A200F5D470 /* HistoryViewController.swift in Sources */,
 				3D2EDB9D2893BC3E002E6DCA /* AppDelegate.swift in Sources */,
 				3DF553292893DC0000F5D470 /* TabBarCoordinator.swift in Sources */,
+				3DF5533D289413BF00F5D470 /* NetworkManager.swift in Sources */,
 				3DF5532C2893E06E00F5D470 /* RepositoriesViewContoroller.swift in Sources */,
 				3DF553372893E0A900F5D470 /* HistoryViewModel.swift in Sources */,
 				3D6D0C862893CA05009BF5FC /* SignInCoordinator.swift in Sources */,
 				3D6D0C7E2893C6C1009BF5FC /* SignInViewController.swift in Sources */,
 				3D6D0C822893C728009BF5FC /* SignInModel.swift in Sources */,
+				3DF5533F2894156C00F5D470 /* NetworkRequestService.swift in Sources */,
 				3DF553302893E07D00F5D470 /* RepositoriesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
