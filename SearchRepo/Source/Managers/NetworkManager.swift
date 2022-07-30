@@ -19,7 +19,8 @@ protocol URLRequestBuilder: URLRequestConvertible {
 
 extension URLRequestBuilder {
   var baseUrl: String {
-    "http://github.com/"
+    // TODO: Movie to string store
+    "https://github.com/"
   }
   
   var baseHeader: HTTPHeaders {

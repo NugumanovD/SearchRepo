@@ -1,5 +1,5 @@
 //
-//  NetworkRequestService.swift
+//  APIManager.swift
 //  SearchRepo
 //
 //  Created by Dmitry Nugumanov on 29.07.2022.
