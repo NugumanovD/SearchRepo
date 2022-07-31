@@ -11,12 +11,23 @@ import UIKit
 
 class TabBarCoordinator: BaseCoordinator {
   
+  private let userSession: UserSessionService
   private let disposeBag = DisposeBag()
+  
+  init(userSession: UserSessionService) {
+    self.userSession = userSession
+  }
+
   
   override func start() {
     let tabBarController = UITabBarController()
     
-    let repositoriesModel = RepositoriesModel()
+    let requestManager = APIManager()
+    let repositoriesModel = RepositoriesModel(
+      repositoriesService: SearchRepositoriesService(requestManager: requestManager),
+      coordinator: self,
+      userSession: userSession
+    )
     let repositoriesViewModel = RepositoriesViewModel(model: repositoriesModel)
     let repositoriesViewController = RepositoriesViewContoroller()
     repositoriesViewController.viewModel = repositoriesViewModel
@@ -46,6 +57,10 @@ class TabBarCoordinator: BaseCoordinator {
     ]
     
     navigationController.viewControllers = [tabBarController]
+  }
+  
+  func openURL(url: URL) {
+    UIApplication.shared.open(url)
   }
   
 }

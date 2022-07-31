@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D01D5CF2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01D5CE2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift */; };
 		3D07A9812893C1D1000831C7 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3D07A9802893C1D1000831C7 /* RxCocoa */; };
 		3D07A9832893C1D1000831C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 3D07A9822893C1D1000831C7 /* RxRelay */; };
 		3D07A9852893C1D1000831C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3D07A9842893C1D1000831C7 /* RxSwift */; };
@@ -39,9 +40,16 @@
 		3DF5535128956BEE00F5D470 /* UserSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535028956BEE00F5D470 /* UserSessionService.swift */; };
 		3DF5535328956C0F00F5D470 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535228956C0F00F5D470 /* DeepLinkHandler.swift */; };
 		3DF5535528958CBF00F5D470 /* ObservableType+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535428958CBF00F5D470 /* ObservableType+Function.swift */; };
+		3DF553572895BAC200F5D470 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553562895BAC200F5D470 /* UITableView+Extension.swift */; };
+		3DF553592895BAED00F5D470 /* UITextField+AddToollbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553582895BAED00F5D470 /* UITextField+AddToollbar.swift */; };
+		3DF5535B2895C0C500F5D470 /* SearchRepositoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535A2895C0C500F5D470 /* SearchRepositoriesService.swift */; };
+		3DF5535D2895CCAC00F5D470 /* RepositoriesReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535C2895CCAC00F5D470 /* RepositoriesReponse.swift */; };
+		3DF553612895E95900F5D470 /* RepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553602895E95900F5D470 /* RepositoryCell.swift */; };
+		3DF553642895EF8B00F5D470 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF553632895EF8B00F5D470 /* AlamofireImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D01D5CE2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+RoundedWithAbbreviations.swift"; sourceTree = "<group>"; };
 		3D2EDB992893BC3E002E6DCA /* SearchRepo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchRepo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D2EDB9C2893BC3E002E6DCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D2EDBA52893BC3E002E6DCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,6 +79,11 @@
 		3DF5535028956BEE00F5D470 /* UserSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionService.swift; sourceTree = "<group>"; };
 		3DF5535228956C0F00F5D470 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		3DF5535428958CBF00F5D470 /* ObservableType+Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Function.swift"; sourceTree = "<group>"; };
+		3DF553562895BAC200F5D470 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		3DF553582895BAED00F5D470 /* UITextField+AddToollbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddToollbar.swift"; sourceTree = "<group>"; };
+		3DF5535A2895C0C500F5D470 /* SearchRepositoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoriesService.swift; sourceTree = "<group>"; };
+		3DF5535C2895CCAC00F5D470 /* RepositoriesReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesReponse.swift; sourceTree = "<group>"; };
+		3DF553602895E95900F5D470 /* RepositoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +96,7 @@
 				3D07A9832893C1D1000831C7 /* RxRelay in Frameworks */,
 				3D07A9812893C1D1000831C7 /* RxCocoa in Frameworks */,
 				3D6D0C722893C32D009BF5FC /* SnapKit in Frameworks */,
+				3DF553642895EF8B00F5D470 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF5534528945A1D00F5D470 /* SignInService.swift */,
+				3DF5535A2895C0C500F5D470 /* SearchRepositoriesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -175,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF55347289557EF00F5D470 /* TokenReponse.swift */,
+				3DF5535C2895CCAC00F5D470 /* RepositoriesReponse.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -191,6 +207,9 @@
 			children = (
 				3DF5534B2895695600F5D470 /* Extension+Data.swift */,
 				3DF5535428958CBF00F5D470 /* ObservableType+Function.swift */,
+				3DF553562895BAC200F5D470 /* UITableView+Extension.swift */,
+				3DF553582895BAED00F5D470 /* UITextField+AddToollbar.swift */,
+				3D01D5CE2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -206,6 +225,7 @@
 		3DF5532A2893E04800F5D470 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				3DF5535E2895E93B00F5D470 /* Views */,
 				3DF5532B2893E06E00F5D470 /* RepositoriesViewContoroller.swift */,
 				3DF5532D2893E07700F5D470 /* RepositoriesViewModel.swift */,
 				3DF5532F2893E07D00F5D470 /* RepositoriesModel.swift */,
@@ -252,6 +272,22 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		3DF5535E2895E93B00F5D470 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3DF5535F2895E94700F5D470 /* RepositoryCell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3DF5535F2895E94700F5D470 /* RepositoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				3DF553602895E95900F5D470 /* RepositoryCell.swift */,
+			);
+			path = RepositoryCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -274,6 +310,7 @@
 				3D07A9842893C1D1000831C7 /* RxSwift */,
 				3D07A98A2893C266000831C7 /* Alamofire */,
 				3D6D0C712893C32D009BF5FC /* SnapKit */,
+				3DF553632895EF8B00F5D470 /* AlamofireImage */,
 			);
 			productName = SearchRepo;
 			productReference = 3D2EDB992893BC3E002E6DCA /* SearchRepo.app */;
@@ -307,6 +344,7 @@
 				3D07A97F2893C1D1000831C7 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				3D07A9892893C266000831C7 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				3D6D0C702893C32D009BF5FC /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3DF553622895EF8B00F5D470 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = 3D2EDB9A2893BC3E002E6DCA /* Products */;
 			projectDirPath = "";
@@ -343,13 +381,18 @@
 				3DF5532E2893E07700F5D470 /* RepositoriesViewModel.swift in Sources */,
 				3DF5533B2893E0BA00F5D470 /* HistoryCoordinator.swift in Sources */,
 				3DF553352893E0A200F5D470 /* HistoryViewController.swift in Sources */,
+				3DF5535B2895C0C500F5D470 /* SearchRepositoriesService.swift in Sources */,
+				3DF553592895BAED00F5D470 /* UITextField+AddToollbar.swift in Sources */,
 				3DF5534628945A1D00F5D470 /* SignInService.swift in Sources */,
+				3D01D5CF2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift in Sources */,
 				3D2EDB9D2893BC3E002E6DCA /* AppDelegate.swift in Sources */,
 				3DF553292893DC0000F5D470 /* TabBarCoordinator.swift in Sources */,
 				3DF5533D289413BF00F5D470 /* NetworkManager.swift in Sources */,
+				3DF553612895E95900F5D470 /* RepositoryCell.swift in Sources */,
 				3DF5532C2893E06E00F5D470 /* RepositoriesViewContoroller.swift in Sources */,
 				3DF553372893E0A900F5D470 /* HistoryViewModel.swift in Sources */,
 				3D6D0C862893CA05009BF5FC /* SignInCoordinator.swift in Sources */,
+				3DF5535D2895CCAC00F5D470 /* RepositoriesReponse.swift in Sources */,
 				3D6D0C7E2893C6C1009BF5FC /* SignInViewController.swift in Sources */,
 				3DF5534A2895686800F5D470 /* KeychainManager.swift in Sources */,
 				3DF5535528958CBF00F5D470 /* ObservableType+Function.swift in Sources */,
@@ -359,6 +402,7 @@
 				3DF5533F2894156C00F5D470 /* APIManager.swift in Sources */,
 				3DF55348289557EF00F5D470 /* TokenReponse.swift in Sources */,
 				3DF553302893E07D00F5D470 /* RepositoriesModel.swift in Sources */,
+				3DF553572895BAC200F5D470 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +638,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		3DF553622895EF8B00F5D470 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -621,6 +673,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3D6D0C702893C32D009BF5FC /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		3DF553632895EF8B00F5D470 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DF553622895EF8B00F5D470 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

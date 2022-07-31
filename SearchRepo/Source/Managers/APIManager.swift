@@ -25,7 +25,7 @@ final class APIManager: RequestManager {
   init() {
     let rootQueue = DispatchQueue(label: "apiManagerQueue")
     let queue = OperationQueue()
-    queue.maxConcurrentOperationCount = 1
+    queue.maxConcurrentOperationCount = 2
     queue.underlyingQueue = rootQueue
     let delegate = SessionDelegate()
     let configuration = URLSessionConfiguration.af.default
@@ -40,6 +40,7 @@ final class APIManager: RequestManager {
         .validate(statusCode: self.avalibelStatusCodes)
         .responseDecodable(of: U.self) { [weak self] response in
           switch response.result {
+            
           case .success(let result):
             observer.onNext(result)
             observer.onCompleted()

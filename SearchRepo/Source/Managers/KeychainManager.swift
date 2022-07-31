@@ -21,7 +21,6 @@ final class KeychainManager {
   func getAuthToken() -> String? {
     let token = load(key: Keys.accessToken)?.toString
     
-    
     return token
   }
   

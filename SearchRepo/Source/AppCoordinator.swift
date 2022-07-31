@@ -54,7 +54,7 @@ private extension AppCoordinator {
   }
   
   func showRepositories() {
-    let coordinator = TabBarCoordinator()
+    let coordinator = TabBarCoordinator(userSession: userSession)
     coordinator.navigationController = navigationController
     start(coordinator: coordinator)
   }

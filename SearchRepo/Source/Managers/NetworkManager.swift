@@ -10,7 +10,6 @@ import RxSwift
 import Foundation
 
 protocol URLRequestBuilder: URLRequestConvertible {
-    var baseUrl: String { get }
     var path: String { get }
     var headers: HTTPHeaders? { get }
     var parameters: Parameters? { get }
@@ -18,10 +17,6 @@ protocol URLRequestBuilder: URLRequestConvertible {
 }
 
 extension URLRequestBuilder {
-  var baseUrl: String {
-    // TODO: Movie to string store
-    "https://github.com/"
-  }
   
   var baseHeader: HTTPHeaders {
     var headers = HTTPHeaders.init()
@@ -30,9 +25,9 @@ extension URLRequestBuilder {
   }
   
   func asURLRequest() throws -> URLRequest {
-    let url = try baseUrl.asURL()
+    let url = try path.asURL()
     
-    var request = URLRequest(url: url.appendingPathComponent(path))
+    var request = URLRequest(url: url)
     request.httpMethod = method.rawValue
     request.headers = baseHeader
     

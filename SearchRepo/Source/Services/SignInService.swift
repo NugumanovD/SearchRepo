@@ -22,11 +22,11 @@ final class SignInService {
       switch self {
       case .getAuthPageUrl:
         // TODO: Movie to string store
-        return "login/oauth/authorize"
+        return "https://github.com/login/oauth/authorize"
         
       case .getAuthorizationToken:
         // TODO: Movie to string store
-        return "login/oauth/access_token"
+        return "https://github.com/login/oauth/access_token"
       }
     }
     
@@ -49,7 +49,7 @@ final class SignInService {
         return [
           // TODO: Movie to string store
           "client_id": "652035a8fdca5f5bf68d",
-          "client_secret": "16a951a74aaece00042dc7983e4bddccfe0e8472",
+          "client_secret": "63f1120f662985267684926fe96a253071b9c5e7",
           "code": code,
           "redirect_uri": "\(scheme)://authentication"
         ]
