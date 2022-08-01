@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3D01D5CF2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01D5CE2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift */; };
+		3D01D5D22897B9F3006C82F8 /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01D5D12897B9F3006C82F8 /* AtomicInteger.swift */; };
+		3D01D5D428981C20006C82F8 /* UITableView+ScrollToBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01D5D328981C20006C82F8 /* UITableView+ScrollToBottom.swift */; };
+		3D01D5D628981D3F006C82F8 /* AlertControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01D5D528981D3F006C82F8 /* AlertControllerModel.swift */; };
 		3D07A9812893C1D1000831C7 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3D07A9802893C1D1000831C7 /* RxCocoa */; };
 		3D07A9832893C1D1000831C7 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 3D07A9822893C1D1000831C7 /* RxRelay */; };
 		3D07A9852893C1D1000831C7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3D07A9842893C1D1000831C7 /* RxSwift */; };
@@ -40,7 +43,7 @@
 		3DF5535128956BEE00F5D470 /* UserSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535028956BEE00F5D470 /* UserSessionService.swift */; };
 		3DF5535328956C0F00F5D470 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535228956C0F00F5D470 /* DeepLinkHandler.swift */; };
 		3DF5535528958CBF00F5D470 /* ObservableType+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535428958CBF00F5D470 /* ObservableType+Function.swift */; };
-		3DF553572895BAC200F5D470 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553562895BAC200F5D470 /* UITableView+Extension.swift */; };
+		3DF553572895BAC200F5D470 /* UITableView+RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553562895BAC200F5D470 /* UITableView+RegisterCell.swift */; };
 		3DF553592895BAED00F5D470 /* UITextField+AddToollbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553582895BAED00F5D470 /* UITextField+AddToollbar.swift */; };
 		3DF5535B2895C0C500F5D470 /* SearchRepositoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535A2895C0C500F5D470 /* SearchRepositoriesService.swift */; };
 		3DF5535D2895CCAC00F5D470 /* RepositoriesReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5535C2895CCAC00F5D470 /* RepositoriesReponse.swift */; };
@@ -50,6 +53,9 @@
 
 /* Begin PBXFileReference section */
 		3D01D5CE2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+RoundedWithAbbreviations.swift"; sourceTree = "<group>"; };
+		3D01D5D12897B9F3006C82F8 /* AtomicInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
+		3D01D5D328981C20006C82F8 /* UITableView+ScrollToBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ScrollToBottom.swift"; sourceTree = "<group>"; };
+		3D01D5D528981D3F006C82F8 /* AlertControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerModel.swift; sourceTree = "<group>"; };
 		3D2EDB992893BC3E002E6DCA /* SearchRepo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchRepo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D2EDB9C2893BC3E002E6DCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D2EDBA52893BC3E002E6DCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,7 +85,7 @@
 		3DF5535028956BEE00F5D470 /* UserSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionService.swift; sourceTree = "<group>"; };
 		3DF5535228956C0F00F5D470 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		3DF5535428958CBF00F5D470 /* ObservableType+Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Function.swift"; sourceTree = "<group>"; };
-		3DF553562895BAC200F5D470 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		3DF553562895BAC200F5D470 /* UITableView+RegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RegisterCell.swift"; sourceTree = "<group>"; };
 		3DF553582895BAED00F5D470 /* UITextField+AddToollbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddToollbar.swift"; sourceTree = "<group>"; };
 		3DF5535A2895C0C500F5D470 /* SearchRepositoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoriesService.swift; sourceTree = "<group>"; };
 		3DF5535C2895CCAC00F5D470 /* RepositoriesReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesReponse.swift; sourceTree = "<group>"; };
@@ -103,6 +109,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D01D5D02897B9E2006C82F8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3D01D5D12897B9F3006C82F8 /* AtomicInteger.swift */,
+				3D01D5D528981D3F006C82F8 /* AlertControllerModel.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		3D2EDB902893BC3E002E6DCA = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +164,7 @@
 				3D6D0C792893C67D009BF5FC /* Services */,
 				3DF5534D28956B1A00F5D470 /* Managers */,
 				3D6D0C7C2893C6A1009BF5FC /* Extensions */,
+				3D01D5D02897B9E2006C82F8 /* Helpers */,
 				3D6D0C7B2893C692009BF5FC /* Protocols */,
 				3D6D0C7A2893C689009BF5FC /* DTO */,
 			);
@@ -207,9 +223,10 @@
 			children = (
 				3DF5534B2895695600F5D470 /* Extension+Data.swift */,
 				3DF5535428958CBF00F5D470 /* ObservableType+Function.swift */,
-				3DF553562895BAC200F5D470 /* UITableView+Extension.swift */,
+				3DF553562895BAC200F5D470 /* UITableView+RegisterCell.swift */,
 				3DF553582895BAED00F5D470 /* UITextField+AddToollbar.swift */,
 				3D01D5CE2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift */,
+				3D01D5D328981C20006C82F8 /* UITableView+ScrollToBottom.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -384,6 +401,7 @@
 				3DF5535B2895C0C500F5D470 /* SearchRepositoriesService.swift in Sources */,
 				3DF553592895BAED00F5D470 /* UITextField+AddToollbar.swift in Sources */,
 				3DF5534628945A1D00F5D470 /* SignInService.swift in Sources */,
+				3D01D5D628981D3F006C82F8 /* AlertControllerModel.swift in Sources */,
 				3D01D5CF2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift in Sources */,
 				3D2EDB9D2893BC3E002E6DCA /* AppDelegate.swift in Sources */,
 				3DF553292893DC0000F5D470 /* TabBarCoordinator.swift in Sources */,
@@ -394,15 +412,17 @@
 				3D6D0C862893CA05009BF5FC /* SignInCoordinator.swift in Sources */,
 				3DF5535D2895CCAC00F5D470 /* RepositoriesReponse.swift in Sources */,
 				3D6D0C7E2893C6C1009BF5FC /* SignInViewController.swift in Sources */,
+				3D01D5D428981C20006C82F8 /* UITableView+ScrollToBottom.swift in Sources */,
 				3DF5534A2895686800F5D470 /* KeychainManager.swift in Sources */,
 				3DF5535528958CBF00F5D470 /* ObservableType+Function.swift in Sources */,
 				3DF5535328956C0F00F5D470 /* DeepLinkHandler.swift in Sources */,
+				3D01D5D22897B9F3006C82F8 /* AtomicInteger.swift in Sources */,
 				3DF5534C2895695600F5D470 /* Extension+Data.swift in Sources */,
 				3D6D0C822893C728009BF5FC /* SignInModel.swift in Sources */,
 				3DF5533F2894156C00F5D470 /* APIManager.swift in Sources */,
 				3DF55348289557EF00F5D470 /* TokenReponse.swift in Sources */,
 				3DF553302893E07D00F5D470 /* RepositoriesModel.swift in Sources */,
-				3DF553572895BAC200F5D470 /* UITableView+Extension.swift in Sources */,
+				3DF553572895BAC200F5D470 /* UITableView+RegisterCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

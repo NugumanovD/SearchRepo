@@ -9,26 +9,30 @@ import RxSwift
 import RxRelay
 import Foundation
 
-enum State {
+fileprivate enum SourceRepositories {
   
-  case initial
-  case loading
-  case onSuccess
-  case onError
+  case load
+  case preload
   
 }
 
 final class RepositoriesModel {
   
-  let searchInput = BehaviorRelay<String>(value: "")
+  let searchInput = BehaviorRelay<String?>(value: nil)
   let repositories = BehaviorRelay<[Repository]>(value: [])
   let loadNextPageAction = PublishSubject<Void>()
   let logOutAction = PublishSubject<Void>()
   let selectedCellAction = PublishSubject<String>()
-  let state = BehaviorRelay<State>(value: .initial)
+  let isLoadingSpinnerAvaliable = PublishSubject<Bool>()
+  let alertButtonAction = PublishSubject<Void>()
+  let onShowError = PublishSubject<AlertControllerModel>()
   
-  private var currentPage = 1
-  
+  private let loadRepositories = BehaviorRelay<[Repository]>(value: [])
+  private let preloadRepositories = BehaviorRelay<[Repository]>(value: [])
+  private var isPaginationRequestStillResume = BehaviorRelay<Bool>(value: false)
+  private var currentPage = AtomicInteger(value: 0)
+  private let chuckAmount = 10
+  private var isCatchError = false
   private let coordinator: TabBarCoordinator
   private let repositoriesService: SearchRepositoriesService
   private let userSession: UserSessionService
@@ -48,50 +52,125 @@ final class RepositoriesModel {
   
   private func setupBindings() {
     searchInput
-      .filter { !$0.isEmpty }
-      .distinctUntilChanged().debounce(.milliseconds(500), scheduler: MainScheduler.instance)
-      .doOnNext { [weak self] searchPath in
-        self?.currentPage = 1
-      self?.loadRepositories(searchPath: searchPath)
+      .skip(1)
+      .compactMap { $0 }
+      .doOnNext { [weak self] searchText in
+        guard let self = self else { return }
+        self.currentPage.value = 0
+        self.loadRepositories(searchText: searchText, needToAppend: false)
     }.disposed(by: disposeBag)
     
-    loadNextPageAction.skip(1)
+    loadNextPageAction
       .doOnNext { [weak self] in
-        if self?.state.value == .loading { return }
-        self?.currentPage += 1
-        self?.loadRepositories()
+        guard let self = self, !self.repositories.value.isEmpty else { return }
+        
+        self.loadRepositories(searchText: self.searchInput.value, needToAppend: true)
       }
       .disposed(by: disposeBag)
     
     selectedCellAction
-      .compactMap { stringURL -> URL? in
-      return URL(string: stringURL)
-    }.doOnNext { [weak self] url in
-      self?.coordinator.openURL(url: url)
-    }.disposed(by: disposeBag)
+      .compactMap { URL(string: $0) }
+      .doOnNext { [weak self] url in
+        self?.coordinator.openURL(url: url)
+      }
+      .disposed(by: disposeBag)
     
     logOutAction.bind(to: userSession.didSignOutAction).disposed(by: disposeBag)
+    
+    Observable.zip(loadRepositories, preloadRepositories) { loadRepositories, preloadRepositories in
+      loadRepositories + preloadRepositories
+    }
+    .delay(.milliseconds(1500), scheduler: MainScheduler.instance)
+    .doOnNext({ [weak self] mergedRepositories in
+      guard let self = self else { return }
+      
+      let sortedValues = mergedRepositories.sorted(by: { $0.stargazersCount ?? 0 > $1.stargazersCount ?? 0 })
+      self.repositories.accept(sortedValues)
+      
+      self.isLoadingSpinnerAvaliable.onNext(false)
+      self.isPaginationRequestStillResume.accept(false)
+    })
+    .disposed(by: disposeBag)
+    
+    alertButtonAction.doOnNext { [weak self] _ in
+      guard let self = self else { return }
+      
+      self.isCatchError = false
+      self.isLoadingSpinnerAvaliable.onNext(false)
+      self.isPaginationRequestStillResume.accept(false)
+    }
+    .disposed(by: disposeBag)
+    
   }
   
-  private func loadRepositories(searchPath path: String? = nil, currentPage: Int = 0) {
-    let searchPath = path ?? searchInput.value
-    state.accept(.loading)
-    repositoriesService.findRepositories(searchPath: searchPath, sort: .byStars, chuckAmount: 15, page: currentPage)
+  private func loadRepositories(searchText: String?, needToAppend: Bool) {
+    if isPaginationRequestStillResume.value || isCatchError { return }
+    
+    DispatchQueue.global(qos: .background).async {
+      self.fetchRepositories(searchText: searchText, typeOfSource: .load, needToAppend: needToAppend)
+      print("thread first \(Thread.current)")
+    }
+    
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1.5, execute: {
+      self.fetchRepositories(searchText: searchText, typeOfSource: .preload, needToAppend: needToAppend)
+      print("thread second \(Thread.current)")
+    })
+  }
+  
+  private func incrementCurrentPage() {
+    currentPage.value += 1
+  }
+  
+  private func applyResponse(_ needToAppend: Bool, source: BehaviorRelay<[Repository]>, response: [Repository]) {
+    if needToAppend {
+      source.accept(source.value + response)
+    } else {
+      source.accept(response)
+    }
+  }
+  
+  private func fetchRepositories(searchText text: String? = nil, typeOfSource: SourceRepositories, needToAppend: Bool = false) {
+    let searchPath = text ?? searchInput.value ?? ""
+    
+    isPaginationRequestStillResume.accept(true)
+    isLoadingSpinnerAvaliable.onNext(true)
+    
+    if currentPage.value == 1 {
+      self.isLoadingSpinnerAvaliable.onNext(false)
+    }
+    
+    incrementCurrentPage()
+    print("ND: - current page \(self.currentPage.value)")
+    repositoriesService.findRepositories(searchPath: searchPath, sort: .byStars, chuckAmount: chuckAmount, page: self.currentPage.value)
       .compactMap { $0.repositories }
+      .map { $0 }
       .subscribe { [weak self] repositories in
         guard let self = self else { return }
-        self.state.accept(.onSuccess)
-        if self.currentPage == 1 {
-          self.repositories.accept(repositories)
+        
+        if typeOfSource == .load {
+          self.applyResponse(needToAppend, source: self.loadRepositories, response: repositories)
         } else {
-          let currentRepositories = self.repositories.value
-          self.repositories.accept(currentRepositories + repositories)
+          self.applyResponse(needToAppend, source: self.preloadRepositories, response: repositories)
         }
       } onError: { [weak self] error in
-        // TODO: - Show Aleert
-        self?.state.accept(.onError)
-        print(error.localizedDescription)
+        guard let self = self else { return }
+        
+        if let error = error as? ResponseError {
+          self.handleError(error)
+        }
       }.disposed(by: disposeBag)
+  }
+  
+  private func handleError(_ error: ResponseError) {
+    print(error.localizedDescription)
+    isCatchError = true
+    onShowError.onNext(
+      .init(
+        title: "Warning",
+        message: "Unfortunately, the number of requests is limited. Try to execute the request after 30 seconds",
+        buttonTitle: "Ok"
+      )
+    )
   }
   
 }

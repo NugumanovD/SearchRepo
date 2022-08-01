@@ -18,11 +18,15 @@ final class RepositoriesViewModel {
     model.selectedCellAction
   }
   
-  var state: BehaviorRelay<State> {
-    model.state
+  var alertButtonAction: PublishSubject<Void> {
+    model.alertButtonAction
   }
   
-  var searchInput: BehaviorRelay<String> {
+  var onShowError: PublishSubject<AlertControllerModel> {
+    model.onShowError
+  }
+  
+  var searchInput: BehaviorRelay<String?> {
     model.searchInput
   }
   
@@ -32,6 +36,10 @@ final class RepositoriesViewModel {
   
   var loadNextPageAction: PublishSubject<Void> {
     model.loadNextPageAction
+  }
+  
+  var isLoadingSpinnerAvaliable: PublishSubject<Bool> {
+    model.isLoadingSpinnerAvaliable
   }
   
   private let disposeBag = DisposeBag()

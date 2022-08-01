@@ -27,7 +27,7 @@ class SignInCoordinator: BaseCoordinator {
   }
   
   override func start() {
-    let apiManager = APIManager()
+    let apiManager = APIManager.shared
     let signInService = SignInService(requestManager: apiManager)
     let model = SignInModel(
       signInService: signInService,

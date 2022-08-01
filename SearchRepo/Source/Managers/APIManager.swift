@@ -10,6 +10,7 @@ import Alamofire
 import RxSwift
 
 enum ResponseError: Error {
+    case timeoutError
     case serverNotResponding
     case noInternetConnection
     case accessDenied
@@ -18,11 +19,12 @@ enum ResponseError: Error {
 
 final class APIManager: RequestManager {
   
+  static let shared = APIManager()
+  
   private var session: Session
   private var avalibelStatusCodes = [200, 201, 422]
-  private var refreshTokenManager = RefreshTokenManager()
   
-  init() {
+  private init() {
     let rootQueue = DispatchQueue(label: "apiManagerQueue")
     let queue = OperationQueue()
     queue.maxConcurrentOperationCount = 2
@@ -56,12 +58,17 @@ final class APIManager: RequestManager {
   }
   
   func errorHandling(error: AFError) -> ResponseError {
-      if error.responseCode == 401 {
-          return .accessDenied
-      }
+    
+    switch error.responseCode {
+    case 401:
+      return .accessDenied
+      
+    case 403:
+      return .timeoutError
+      
+    default:
       return .serverNotResponding
+    }
   }
   
 }
-
-class RefreshTokenManager: RequestInterceptor {}

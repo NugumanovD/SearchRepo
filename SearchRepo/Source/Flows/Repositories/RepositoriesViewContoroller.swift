@@ -24,8 +24,30 @@ final class RepositoriesViewContoroller: UIViewController {
   
   private lazy var tableView: UITableView = {
     let tableView = UITableView()
+    tableView.tableFooterView = UIView(frame: .zero)
     
     return tableView
+  }()
+  
+  private lazy var viewSpinner: UIView = {
+    let view = UIView(frame: CGRect(
+      x: 0,
+      y: 0,
+      width: view.frame.size.width,
+      height: 100)
+    )
+    let spinner = UIActivityIndicatorView()
+    spinner.center = view.center
+    view.addSubview(spinner)
+    spinner.startAnimating()
+    
+    return view
+  }()
+  
+  private lazy var refreshControl: UIRefreshControl = {
+    let refreshControl = UIRefreshControl()
+    
+    return refreshControl
   }()
   
   private let disposeBag = DisposeBag()
@@ -47,11 +69,14 @@ final class RepositoriesViewContoroller: UIViewController {
       action: #selector(logoutAction)
     )
     
+    initializeBindings()
     tableView.register(cellClass: RepositoryCell.self)
-    
+    refreshControl.addTarget(self, action: #selector(refreshControlTriggered), for: .valueChanged)
     setupLayoutSearchBar()
     setupLayoutTableView()
-    
+  }
+  
+  private func initializeBindings() {
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
     
@@ -63,27 +88,36 @@ final class RepositoriesViewContoroller: UIViewController {
         
         cell.bind(with: element)
       }.disposed(by: disposeBag)
-   
-    searchBar.searchTextField.rx.text
-      .orEmpty
-      .debounce(.milliseconds(30), scheduler: MainScheduler.instance)
-      .bind(to: viewModel.searchInput)
-      .disposed(by: disposeBag)
     
-    tableView.rx.didScroll.doOnNext { [weak self] _ in
-      guard let self = self else { return }
-      
-      let offsetY = self.tableView.contentOffset.y
-      let contentHeight = self.tableView.contentSize.height
-      
-      if offsetY > (contentHeight - self.tableView.frame.size.height - 100) {
-        if self.viewModel.state.value != .loading {
+    tableView.rx.didScroll
+      .doOnNext { [weak self] _ in
+        guard let self = self else { return }
+        
+        let offsetY = self.tableView.contentOffset.y
+        let contentHeight = self.tableView.contentSize.height
+        
+        if offsetY > (contentHeight - self.tableView.frame.size.height) {
           self.viewModel.loadNextPageAction.onNext(())
         }
       }
-    }
-    .disposed(by: disposeBag)
+      .disposed(by: disposeBag)
     
+    viewModel.isLoadingSpinnerAvaliable
+      .observe(on: MainScheduler.instance)
+      .doOnNext { [weak self] isAvaliable in
+        guard let self = self else { return }
+        self.tableView.tableFooterView = isAvaliable ? self.viewSpinner : UIView(frame: .zero)
+      }
+      .disposed(by: disposeBag)
+    
+    viewModel.onShowError
+      .map { [weak self] in
+        self?.tableView.scrollToBottomRow()
+        self?.presentSingleButtonDialog(model: $0)
+      }
+      .takeLast(1)
+      .subscribe()
+      .disposed(by: disposeBag)
   }
   
   private func setupLayoutSearchBar() {
@@ -103,14 +137,33 @@ final class RepositoriesViewContoroller: UIViewController {
     }
   }
   
-  @objc func logoutAction() {
+  private func presentSingleButtonDialog(model: AlertControllerModel) {
+    let alertController = UIAlertController(
+      title: model.title,
+      message: model.message,
+      preferredStyle: .alert
+    )
+    
+    let action = UIAlertAction(title: model.buttonTitle, style: .default) { [weak self] _ in
+      self?.viewModel.alertButtonAction.onNext(())
+    }
+    
+    alertController.addAction(action)
+    navigationController?.present(alertController, animated: true)
+  }
+  
+  @objc private func logoutAction() {
     viewModel.logOutAction.onNext(())
+  }
+  
+  @objc private func refreshControlTriggered() {
+    viewModel.loadNextPageAction.onNext(())
   }
   
 }
 
 extension RepositoriesViewContoroller: UITableViewDelegate {
-
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let configuration = viewModel.items.value[indexPath.row]
     viewModel.selectedCellAction.onNext(configuration.pageURL)
@@ -123,10 +176,10 @@ extension RepositoriesViewContoroller: UITableViewDelegate {
 }
 
 extension RepositoriesViewContoroller: UISearchBarDelegate {
-
+  
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-    self.tableView.reloadData()
     searchBar.endEditing(true)
+    viewModel.searchInput.accept(searchBar.searchTextField.text)
   }
-
+  
 }

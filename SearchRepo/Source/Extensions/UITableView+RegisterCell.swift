@@ -1,5 +1,5 @@
 //
-//  UITableView+Extension.swift
+//  UITableView+RegisterCell.swift
 //  SearchRepo
 //
 //  Created by Dmitry Nugumanov on 30.07.2022.

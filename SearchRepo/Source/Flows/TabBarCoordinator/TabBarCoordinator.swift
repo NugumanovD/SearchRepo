@@ -22,7 +22,7 @@ class TabBarCoordinator: BaseCoordinator {
   override func start() {
     let tabBarController = UITabBarController()
     
-    let requestManager = APIManager()
+    let requestManager = APIManager.shared
     let repositoriesModel = RepositoriesModel(
       repositoriesService: SearchRepositoriesService(requestManager: requestManager),
       coordinator: self,
