@@ -27,8 +27,10 @@
 		3D6D0C842893C95E009BF5FC /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D0C832893C95E009BF5FC /* BaseCoordinator.swift */; };
 		3D6D0C862893CA05009BF5FC /* SignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D0C852893CA05009BF5FC /* SignInCoordinator.swift */; };
 		3D74196C28996E3F0079149D /* Repository.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D74196A28996E3F0079149D /* Repository.xcdatamodeld */; };
-		3D74196F28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74196D28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift */; };
-		3D74197028996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74196E28996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift */; };
+		3DC9A1982899934800F8D749 /* RepositoryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9A1942899934800F8D749 /* RepositoryEntity+CoreDataClass.swift */; };
+		3DC9A1992899934800F8D749 /* RepositoryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9A1952899934800F8D749 /* RepositoryEntity+CoreDataProperties.swift */; };
+		3DC9A19A2899934800F8D749 /* OwnerEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9A1962899934800F8D749 /* OwnerEntity+CoreDataClass.swift */; };
+		3DC9A19B2899934800F8D749 /* OwnerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9A1972899934800F8D749 /* OwnerEntity+CoreDataProperties.swift */; };
 		3DF553292893DC0000F5D470 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553282893DC0000F5D470 /* TabBarCoordinator.swift */; };
 		3DF5532C2893E06E00F5D470 /* RepositoriesViewContoroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5532B2893E06E00F5D470 /* RepositoriesViewContoroller.swift */; };
 		3DF5532E2893E07700F5D470 /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5532D2893E07700F5D470 /* RepositoriesViewModel.swift */; };
@@ -73,8 +75,10 @@
 		3D6D0C832893C95E009BF5FC /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		3D6D0C852893CA05009BF5FC /* SignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCoordinator.swift; sourceTree = "<group>"; };
 		3D74196B28996E3F0079149D /* Repository.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Repository.xcdatamodel; sourceTree = "<group>"; };
-		3D74196D28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3D74196E28996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3DC9A1942899934800F8D749 /* RepositoryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3DC9A1952899934800F8D749 /* RepositoryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3DC9A1962899934800F8D749 /* OwnerEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OwnerEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3DC9A1972899934800F8D749 /* OwnerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OwnerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3DF553282893DC0000F5D470 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		3DF5532B2893E06E00F5D470 /* RepositoriesViewContoroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewContoroller.swift; sourceTree = "<group>"; };
 		3DF5532D2893E07700F5D470 /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
@@ -129,6 +133,10 @@
 		3D2EDB902893BC3E002E6DCA = {
 			isa = PBXGroup;
 			children = (
+				3DC9A1942899934800F8D749 /* RepositoryEntity+CoreDataClass.swift */,
+				3DC9A1952899934800F8D749 /* RepositoryEntity+CoreDataProperties.swift */,
+				3DC9A1962899934800F8D749 /* OwnerEntity+CoreDataClass.swift */,
+				3DC9A1972899934800F8D749 /* OwnerEntity+CoreDataProperties.swift */,
 				3D2EDB9B2893BC3E002E6DCA /* SearchRepo */,
 				3D2EDB9A2893BC3E002E6DCA /* Products */,
 			);
@@ -163,8 +171,6 @@
 		3D51E964289867B600F83D0C /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				3D74196D28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift */,
-				3D74196E28996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -418,6 +424,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF553392893E0B000F5D470 /* HistoryModel.swift in Sources */,
+				3DC9A19A2899934800F8D749 /* OwnerEntity+CoreDataClass.swift in Sources */,
+				3DC9A19B2899934800F8D749 /* OwnerEntity+CoreDataProperties.swift in Sources */,
 				3DF553322893E08600F5D470 /* RepositoriesCoordinator.swift in Sources */,
 				3D6D0C802893C706009BF5FC /* SignInViewModel.swift in Sources */,
 				3D6D0C842893C95E009BF5FC /* BaseCoordinator.swift in Sources */,
@@ -430,7 +438,7 @@
 				3DF553592895BAED00F5D470 /* UITextField+AddToollbar.swift in Sources */,
 				3DF5534628945A1D00F5D470 /* SignInService.swift in Sources */,
 				3D01D5D628981D3F006C82F8 /* AlertControllerModel.swift in Sources */,
-				3D74196F28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift in Sources */,
+				3DC9A1982899934800F8D749 /* RepositoryEntity+CoreDataClass.swift in Sources */,
 				3D01D5CF2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift in Sources */,
 				3D2EDB9D2893BC3E002E6DCA /* AppDelegate.swift in Sources */,
 				3DF553292893DC0000F5D470 /* TabBarCoordinator.swift in Sources */,
@@ -443,7 +451,7 @@
 				3DF5535D2895CCAC00F5D470 /* RepositoriesReponse.swift in Sources */,
 				3D6D0C7E2893C6C1009BF5FC /* SignInViewController.swift in Sources */,
 				3D01D5D428981C20006C82F8 /* UITableView+ScrollToBottom.swift in Sources */,
-				3D74197028996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift in Sources */,
+				3DC9A1992899934800F8D749 /* RepositoryEntity+CoreDataProperties.swift in Sources */,
 				3DF5534A2895686800F5D470 /* KeychainManager.swift in Sources */,
 				3DF5535528958CBF00F5D470 /* ObservableType+Function.swift in Sources */,
 				3DF5535328956C0F00F5D470 /* DeepLinkHandler.swift in Sources */,

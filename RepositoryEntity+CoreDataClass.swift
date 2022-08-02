@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(RepositoryEntity)
+
 public class RepositoryEntity: NSManagedObject {
 
 }

@@ -20,7 +20,6 @@ fileprivate enum SourceRepositories {
 final class RepositoriesModel {
   
   let searchInput = BehaviorRelay<String?>(value: nil)
-//  private let repositories = BehaviorRelay<[Repository]>(value: [])
   let presentableRepositories = BehaviorRelay<[RepositoryConfiguration]>(value: [])
   let loadNextPageAction = PublishSubject<Void>()
   let logOutAction = PublishSubject<Void>()
@@ -60,6 +59,35 @@ final class RepositoriesModel {
     self.coreDataManager = coreDataManager
     
     setupBindings()
+    observeNotitfications()
+  }
+  
+  private func observeNotitfications() {
+    let notificationCenter = NotificationCenter.default
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(managedObjectContextObjectsDidChange),
+      name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
+      object: self.coreDataManager.mainManagedObjectContext
+    )
+  }
+  
+  @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+    guard let userInfo = notification.userInfo else { return }
+    
+    if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
+      print("--- INSERTS ---")
+      print(inserts)
+      
+      guard let entity = inserts.first as? RepositoryEntity else { return }
+      
+      if let index = repositories.value.firstIndex(where: { $0.id == entity.id }) {
+        var repositoriesValue = repositories.value
+        repositoriesValue[index] = entity.convertToRepository()
+        repositories.accept(repositoriesValue)
+      }
+      print("+++++++++++++++")
+    }
   }
   
   private func setupBindings() {
@@ -97,6 +125,7 @@ final class RepositoriesModel {
           $0.toRepositoryConfiguration(with: self.coreDataManager.mainManagedObjectContext)
         }
       }
+      .observe(on: MainScheduler.instance)
       .bind(to: presentableRepositories)
       .disposed(by: disposeBag)
     
@@ -107,7 +136,7 @@ final class RepositoriesModel {
     .doOnNext({ [weak self] mergedRepositories in
       guard let self = self else { return }
       
-      let sortedValues = mergedRepositories.sorted(by: { $0.stargazersCount ?? 0 > $1.stargazersCount ?? 0 })
+      let sortedValues = mergedRepositories.sorted(by: { $0.stargazersCount > $1.stargazersCount })
       self.repositories.accept(sortedValues)
       
       self.isLoadingSpinnerAvaliable.onNext(false)
@@ -132,7 +161,7 @@ final class RepositoriesModel {
     
     if let repository = repositories.value.first(where: { $0.id == Int(id) }) {
       let context = coreDataManager.mainManagedObjectContext
-      repository.convertToViewedEntity(with: context)
+      repository.convertToRepositoryEntity(with: context)
       coreDataManager.saveChanges()
     }
   }

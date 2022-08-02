@@ -16,8 +16,22 @@ extension RepositoryEntity {
         return NSFetchRequest<RepositoryEntity>(entityName: "RepositoryEntity")
     }
 
+    @NSManaged public var fullName: String?
     @NSManaged public var id: Int64
+    @NSManaged public var language: String?
+    @NSManaged public var stargazersCount: Int64
     @NSManaged public var viewed: Bool
+    @NSManaged public var ownerEntity: OwnerEntity?
+  
+  func convertToRepository() -> Repository {
+    Repository(
+      id: Int(id),
+      fullName: fullName,
+      stargazersCount: Int(stargazersCount),
+      owner: ownerEntity?.convertToOwner(),
+      language: language
+    )
+  }
 
 }
 
