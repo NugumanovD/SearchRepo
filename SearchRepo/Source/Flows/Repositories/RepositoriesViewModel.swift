@@ -14,7 +14,7 @@ final class RepositoriesViewModel {
   var model: RepositoriesModel
   var items = BehaviorRelay<[RepositoryConfiguration]>(value: [])
   
-  var selectedCellAction: PublishSubject<String> {
+  var selectedCellAction: PublishSubject<RepositoryConfiguration> {
     model.selectedCellAction
   }
   
@@ -51,27 +51,28 @@ final class RepositoriesViewModel {
   }
   
   private func setupBindings() {
-    model.repositories
-      .map {
-        $0.map { $0.convertToRepositoryConfiguration() }
-      }
-      .bind(to: items)
-      .disposed(by: disposeBag)
+    model.presentableRepositories.bind(to: items).disposed(by: disposeBag)
   }
   
 }
 
+// TODO: - MOVE
 struct RepositoryConfiguration {
   
-  var id: Int?
+  var id: Int
   var title: String?
   var stargazersCount: Int?
   var language: String?
-  var pageURL: String
+  var pageURLString: String?
   var avatarURLString: String?
+  var viewed: Bool
   
   var avatarURL: URL {
     URL(string: avatarURLString ?? "http://www.github.com")!
+  }
+  
+  var pageURL: URL {
+    URL(string: pageURLString ?? "http://www.github.com")!
   }
   
 }

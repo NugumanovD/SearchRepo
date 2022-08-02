@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct RepositoryReponse: Codable {
   let totalCount: Int?
@@ -22,8 +23,8 @@ struct RepositoryReponse: Codable {
 }
 
 // MARK: - RepositoryElement
-struct Repository: Codable {
-  let id: Int?
+class Repository: Codable {
+  let id: Int
   let fullName: String?
   let stargazersCount: Int?
   let owner: Owner?
@@ -40,22 +41,6 @@ struct Repository: Codable {
   }
 }
 
-extension Repository {
-  
-  func convertToRepositoryConfiguration() -> RepositoryConfiguration {
-    .init(
-      id: id,
-      title: fullName,
-      stargazersCount: stargazersCount,
-      language: language,
-      pageURL: owner?.htmlURL ?? "https://github.com",
-      avatarURLString: owner?.avatarURL
-    )
-  }
-  
-}
-
-
 // MARK: - OwnerClass
 struct Owner: Codable {
   let id: Int?
@@ -67,4 +52,53 @@ struct Owner: Codable {
     case avatarURL = "avatar_url"
     case htmlURL = "html_url"
   }
+}
+
+
+extension Repository {
+  
+  func toRepositoryConfiguration(with context: NSManagedObjectContext) -> RepositoryConfiguration {
+    RepositoryConfiguration(
+      id: id,
+      title: fullName,
+      stargazersCount: stargazersCount,
+      language: language,
+      pageURLString: owner?.htmlURL ?? "https://github.com",
+      avatarURLString: owner?.avatarURL,
+      viewed: isViewed(with: context)
+    )
+  }
+  
+  func isViewed(with context: NSManagedObjectContext) -> Bool {
+    let request = createFetchRequest(for: id)
+    
+    let viewed = try? context.fetch(request).first
+    
+    return viewed?.viewed ?? false
+  }
+  
+  @discardableResult
+  func convertToViewedEntity(with context: NSManagedObjectContext) -> RepositoryEntity {
+    let entity = find(id: id, with: context) ?? RepositoryEntity(context: context)
+    entity.id = Int64(id)
+    entity.viewed = true
+    
+    return entity
+  }
+  
+  func find(id: Int, with context: NSManagedObjectContext) -> RepositoryEntity? {
+    let request = createFetchRequest(for: id)
+    
+    return try? context.fetch(request).first
+  }
+  
+  
+  private func createFetchRequest(for id: Int) -> NSFetchRequest<RepositoryEntity> {
+    let request: NSFetchRequest<RepositoryEntity> = RepositoryEntity.fetchRequest()
+    request.predicate = NSPredicate(format: "id = %i", Int64(id))
+    request.returnsObjectsAsFaults = false
+    
+    return request
+  }
+  
 }

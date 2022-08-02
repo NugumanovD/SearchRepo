@@ -18,6 +18,7 @@
 		3D2EDB9D2893BC3E002E6DCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EDB9C2893BC3E002E6DCA /* AppDelegate.swift */; };
 		3D2EDBA62893BC3E002E6DCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D2EDBA52893BC3E002E6DCA /* Assets.xcassets */; };
 		3D2EDBA92893BC3E002E6DCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D2EDBA72893BC3E002E6DCA /* LaunchScreen.storyboard */; };
+		3D51E96628986C8400F83D0C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D51E96528986C8400F83D0C /* CoreDataManager.swift */; };
 		3D6D0C722893C32D009BF5FC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D6D0C712893C32D009BF5FC /* SnapKit */; };
 		3D6D0C762893C5A2009BF5FC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D0C752893C5A2009BF5FC /* AppCoordinator.swift */; };
 		3D6D0C7E2893C6C1009BF5FC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D0C7D2893C6C1009BF5FC /* SignInViewController.swift */; };
@@ -25,6 +26,9 @@
 		3D6D0C822893C728009BF5FC /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D0C812893C728009BF5FC /* SignInModel.swift */; };
 		3D6D0C842893C95E009BF5FC /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D0C832893C95E009BF5FC /* BaseCoordinator.swift */; };
 		3D6D0C862893CA05009BF5FC /* SignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D0C852893CA05009BF5FC /* SignInCoordinator.swift */; };
+		3D74196C28996E3F0079149D /* Repository.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D74196A28996E3F0079149D /* Repository.xcdatamodeld */; };
+		3D74196F28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74196D28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift */; };
+		3D74197028996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74196E28996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift */; };
 		3DF553292893DC0000F5D470 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF553282893DC0000F5D470 /* TabBarCoordinator.swift */; };
 		3DF5532C2893E06E00F5D470 /* RepositoriesViewContoroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5532B2893E06E00F5D470 /* RepositoriesViewContoroller.swift */; };
 		3DF5532E2893E07700F5D470 /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF5532D2893E07700F5D470 /* RepositoriesViewModel.swift */; };
@@ -61,12 +65,16 @@
 		3D2EDBA52893BC3E002E6DCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D2EDBA82893BC3E002E6DCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D2EDBAA2893BC3E002E6DCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D51E96528986C8400F83D0C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3D6D0C752893C5A2009BF5FC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3D6D0C7D2893C6C1009BF5FC /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		3D6D0C7F2893C706009BF5FC /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		3D6D0C812893C728009BF5FC /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		3D6D0C832893C95E009BF5FC /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		3D6D0C852893CA05009BF5FC /* SignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCoordinator.swift; sourceTree = "<group>"; };
+		3D74196B28996E3F0079149D /* Repository.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Repository.xcdatamodel; sourceTree = "<group>"; };
+		3D74196D28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3D74196E28996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3DF553282893DC0000F5D470 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		3DF5532B2893E06E00F5D470 /* RepositoriesViewContoroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewContoroller.swift; sourceTree = "<group>"; };
 		3DF5532D2893E07700F5D470 /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
@@ -143,12 +151,31 @@
 			path = SearchRepo;
 			sourceTree = "<group>";
 		};
+		3D51E963289867A600F83D0C /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				3D51E964289867B600F83D0C /* Entity */,
+				3D51E96528986C8400F83D0C /* CoreDataManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		3D51E964289867B600F83D0C /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3D74196D28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift */,
+				3D74196E28996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		3D6D0C732893C566009BF5FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				3D2EDBA52893BC3E002E6DCA /* Assets.xcassets */,
 				3D2EDBA72893BC3E002E6DCA /* LaunchScreen.storyboard */,
 				3D2EDBAA2893BC3E002E6DCA /* Info.plist */,
+				3D74196A28996E3F0079149D /* Repository.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -164,6 +191,7 @@
 				3D6D0C792893C67D009BF5FC /* Services */,
 				3DF5534D28956B1A00F5D470 /* Managers */,
 				3D6D0C7C2893C6A1009BF5FC /* Extensions */,
+				3D51E963289867A600F83D0C /* Storage */,
 				3D01D5D02897B9E2006C82F8 /* Helpers */,
 				3D6D0C7B2893C692009BF5FC /* Protocols */,
 				3D6D0C7A2893C689009BF5FC /* DTO */,
@@ -402,6 +430,7 @@
 				3DF553592895BAED00F5D470 /* UITextField+AddToollbar.swift in Sources */,
 				3DF5534628945A1D00F5D470 /* SignInService.swift in Sources */,
 				3D01D5D628981D3F006C82F8 /* AlertControllerModel.swift in Sources */,
+				3D74196F28996ECD0079149D /* RepositoryEntity+CoreDataClass.swift in Sources */,
 				3D01D5CF2896A42C006C82F8 /* Int+RoundedWithAbbreviations.swift in Sources */,
 				3D2EDB9D2893BC3E002E6DCA /* AppDelegate.swift in Sources */,
 				3DF553292893DC0000F5D470 /* TabBarCoordinator.swift in Sources */,
@@ -409,16 +438,19 @@
 				3DF553612895E95900F5D470 /* RepositoryCell.swift in Sources */,
 				3DF5532C2893E06E00F5D470 /* RepositoriesViewContoroller.swift in Sources */,
 				3DF553372893E0A900F5D470 /* HistoryViewModel.swift in Sources */,
+				3D51E96628986C8400F83D0C /* CoreDataManager.swift in Sources */,
 				3D6D0C862893CA05009BF5FC /* SignInCoordinator.swift in Sources */,
 				3DF5535D2895CCAC00F5D470 /* RepositoriesReponse.swift in Sources */,
 				3D6D0C7E2893C6C1009BF5FC /* SignInViewController.swift in Sources */,
 				3D01D5D428981C20006C82F8 /* UITableView+ScrollToBottom.swift in Sources */,
+				3D74197028996ECD0079149D /* RepositoryEntity+CoreDataProperties.swift in Sources */,
 				3DF5534A2895686800F5D470 /* KeychainManager.swift in Sources */,
 				3DF5535528958CBF00F5D470 /* ObservableType+Function.swift in Sources */,
 				3DF5535328956C0F00F5D470 /* DeepLinkHandler.swift in Sources */,
 				3D01D5D22897B9F3006C82F8 /* AtomicInteger.swift in Sources */,
 				3DF5534C2895695600F5D470 /* Extension+Data.swift in Sources */,
 				3D6D0C822893C728009BF5FC /* SignInModel.swift in Sources */,
+				3D74196C28996E3F0079149D /* Repository.xcdatamodeld in Sources */,
 				3DF5533F2894156C00F5D470 /* APIManager.swift in Sources */,
 				3DF55348289557EF00F5D470 /* TokenReponse.swift in Sources */,
 				3DF553302893E07D00F5D470 /* RepositoriesModel.swift in Sources */,
@@ -700,6 +732,19 @@
 			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		3D74196A28996E3F0079149D /* Repository.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D74196B28996E3F0079149D /* Repository.xcdatamodel */,
+			);
+			currentVersion = 3D74196B28996E3F0079149D /* Repository.xcdatamodel */;
+			path = Repository.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3D2EDB912893BC3E002E6DCA /* Project object */;
 }

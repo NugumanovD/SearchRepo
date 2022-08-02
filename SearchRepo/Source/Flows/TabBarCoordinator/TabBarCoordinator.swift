@@ -13,12 +13,12 @@ class TabBarCoordinator: BaseCoordinator {
   
   private let userSession: UserSessionService
   private let disposeBag = DisposeBag()
+  private let coreDataManager = CoreDataManager(modelName: "Repository")
   
   init(userSession: UserSessionService) {
     self.userSession = userSession
   }
 
-  
   override func start() {
     let tabBarController = UITabBarController()
     
@@ -26,7 +26,8 @@ class TabBarCoordinator: BaseCoordinator {
     let repositoriesModel = RepositoriesModel(
       repositoriesService: SearchRepositoriesService(requestManager: requestManager),
       coordinator: self,
-      userSession: userSession
+      userSession: userSession,
+      coreDataManager: coreDataManager
     )
     let repositoriesViewModel = RepositoriesViewModel(model: repositoriesModel)
     let repositoriesViewController = RepositoriesViewContoroller()

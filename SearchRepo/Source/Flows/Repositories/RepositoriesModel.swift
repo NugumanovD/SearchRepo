@@ -8,6 +8,7 @@
 import RxSwift
 import RxRelay
 import Foundation
+import CoreData
 
 fileprivate enum SourceRepositories {
   
@@ -19,33 +20,44 @@ fileprivate enum SourceRepositories {
 final class RepositoriesModel {
   
   let searchInput = BehaviorRelay<String?>(value: nil)
-  let repositories = BehaviorRelay<[Repository]>(value: [])
+//  private let repositories = BehaviorRelay<[Repository]>(value: [])
+  let presentableRepositories = BehaviorRelay<[RepositoryConfiguration]>(value: [])
   let loadNextPageAction = PublishSubject<Void>()
   let logOutAction = PublishSubject<Void>()
-  let selectedCellAction = PublishSubject<String>()
+  let selectedCellAction = PublishSubject<RepositoryConfiguration>()
   let isLoadingSpinnerAvaliable = PublishSubject<Bool>()
   let alertButtonAction = PublishSubject<Void>()
   let onShowError = PublishSubject<AlertControllerModel>()
   
+  private let repositories = BehaviorRelay<[Repository]>(value: [])
   private let loadRepositories = BehaviorRelay<[Repository]>(value: [])
   private let preloadRepositories = BehaviorRelay<[Repository]>(value: [])
   private var isPaginationRequestStillResume = BehaviorRelay<Bool>(value: false)
   private var currentPage = AtomicInteger(value: 0)
-  private let chuckAmount = 10
+  private let chuckAmount = 1
   private var isCatchError = false
   private let coordinator: TabBarCoordinator
   private let repositoriesService: SearchRepositoriesService
   private let userSession: UserSessionService
+  private let coreDataManager: CoreDataManager
   private let disposeBag = DisposeBag()
+  
+  private let operationQueue: OperationQueue = {
+    let operationQueue = OperationQueue()
+    
+    return operationQueue
+  }()
   
   init(
     repositoriesService: SearchRepositoriesService,
     coordinator: TabBarCoordinator,
-    userSession: UserSessionService
+    userSession: UserSessionService,
+    coreDataManager: CoreDataManager
   ) {
     self.repositoriesService = repositoriesService
     self.coordinator = coordinator
     self.userSession = userSession
+    self.coreDataManager = coreDataManager
     
     setupBindings()
   }
@@ -69,13 +81,24 @@ final class RepositoriesModel {
       .disposed(by: disposeBag)
     
     selectedCellAction
-      .compactMap { URL(string: $0) }
-      .doOnNext { [weak self] url in
-        self?.coordinator.openURL(url: url)
+      .compactMap { $0 }
+      .doOnNext { [weak self] repository in
+        guard let self = self else { return }
+        self.markAsViewedIfNeeded(with: repository.id)
+        self.coordinator.openURL(url: repository.pageURL)
       }
       .disposed(by: disposeBag)
     
     logOutAction.bind(to: userSession.didSignOutAction).disposed(by: disposeBag)
+    
+    repositories
+      .map {
+        $0.map {
+          $0.toRepositoryConfiguration(with: self.coreDataManager.mainManagedObjectContext)
+        }
+      }
+      .bind(to: presentableRepositories)
+      .disposed(by: disposeBag)
     
     Observable.zip(loadRepositories, preloadRepositories) { loadRepositories, preloadRepositories in
       loadRepositories + preloadRepositories
@@ -100,7 +123,18 @@ final class RepositoriesModel {
       self.isPaginationRequestStillResume.accept(false)
     }
     .disposed(by: disposeBag)
+  }
+  
+  func markAsViewedIfNeeded(with id: Int) {
+    if let _ = try? coreDataManager.find(id: id) {
+      return
+    }
     
+    if let repository = repositories.value.first(where: { $0.id == Int(id) }) {
+      let context = coreDataManager.mainManagedObjectContext
+      repository.convertToViewedEntity(with: context)
+      coreDataManager.saveChanges()
+    }
   }
   
   private func loadRepositories(searchText: String?, needToAppend: Bool) {

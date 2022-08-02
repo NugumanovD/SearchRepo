@@ -56,6 +56,7 @@ final class RepositoriesViewContoroller: UIViewController {
     super.viewDidLoad()
     
     setupView()
+    initializeBindings()
   }
   
   private func setupView() {
@@ -69,7 +70,6 @@ final class RepositoriesViewContoroller: UIViewController {
       action: #selector(logoutAction)
     )
     
-    initializeBindings()
     tableView.register(cellClass: RepositoryCell.self)
     refreshControl.addTarget(self, action: #selector(refreshControlTriggered), for: .valueChanged)
     setupLayoutSearchBar()
@@ -166,7 +166,7 @@ extension RepositoriesViewContoroller: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let configuration = viewModel.items.value[indexPath.row]
-    viewModel.selectedCellAction.onNext(configuration.pageURL)
+    viewModel.selectedCellAction.onNext(configuration)
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

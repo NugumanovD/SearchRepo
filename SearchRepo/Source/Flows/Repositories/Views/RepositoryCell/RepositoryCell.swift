@@ -100,6 +100,7 @@ final class RepositoryCell: UITableViewCell {
     titleLabel.textColor = .red
     starsCountLabel.text = configuration.stargazersCount?.roundedWithAbbreviations
     languageLabel.text = configuration.language
+    backgroundColor = configuration.viewed ? UIColor.systemMint : .white
   }
   
 }
