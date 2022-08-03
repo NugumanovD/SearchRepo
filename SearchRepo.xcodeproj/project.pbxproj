@@ -136,10 +136,6 @@
 		3D2EDB902893BC3E002E6DCA = {
 			isa = PBXGroup;
 			children = (
-				3DC9A1942899934800F8D749 /* RepositoryEntity+CoreDataClass.swift */,
-				3DC9A1952899934800F8D749 /* RepositoryEntity+CoreDataProperties.swift */,
-				3DC9A1962899934800F8D749 /* OwnerEntity+CoreDataClass.swift */,
-				3DC9A1972899934800F8D749 /* OwnerEntity+CoreDataProperties.swift */,
 				3D2EDB9B2893BC3E002E6DCA /* SearchRepo */,
 				3D2EDB9A2893BC3E002E6DCA /* Products */,
 			);
@@ -174,6 +170,10 @@
 		3D51E964289867B600F83D0C /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				3DC9A1942899934800F8D749 /* RepositoryEntity+CoreDataClass.swift */,
+				3DC9A1952899934800F8D749 /* RepositoryEntity+CoreDataProperties.swift */,
+				3DC9A1962899934800F8D749 /* OwnerEntity+CoreDataClass.swift */,
+				3DC9A1972899934800F8D749 /* OwnerEntity+CoreDataProperties.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
