@@ -18,14 +18,14 @@ final class KeychainManager {
   static let shared = KeychainManager()
   private init() {}
   
-  func getAuthToken() -> String? {
-    let token = load(key: Keys.accessToken)?.toString
+  func getAuthToken() -> String {
+    let token = load(key: Keys.accessToken)?.toString ?? ""
     
     return token
   }
   
   func setAuthToken(value: String?) {
-    if let newValue = value, let valueData = newValue.data(using: .utf8) {
+    if let newValue = value, let valueData = "token \(newValue)".data(using: .utf8) {
       save(key: Keys.accessToken, data: valueData)
     }
   }

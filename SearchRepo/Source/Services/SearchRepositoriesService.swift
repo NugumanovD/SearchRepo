@@ -16,26 +16,35 @@ enum SortRepositoryResponse: String {
   
 }
 
+struct SearchRepositoriesAPIConfiguration {
+  
+  let searchPath: String
+  let sortRepositoryResponse: SortRepositoryResponse
+  let chunkAmount: Int
+  let page: Int
+  let accessToken: String
+  
+}
+
 final class SearchRepositoriesService {
   
   enum SearchRepositoriesRequest: URLRequestBuilder {
     
-    case findRepositories(String, SortRepositoryResponse, Int, Int)
+    case findRepositories(SearchRepositoriesAPIConfiguration)
     
     var path: String {
       switch self {
-      case .findRepositories(_, _, _, _):
+      case .findRepositories:
         return "https://api.github.com/search/repositories"
       }
     }
     
     var headers: HTTPHeaders? {
       switch self {
-      case .findRepositories(_, _, _, _):
+      case let .findRepositories(configuration):
         var headers = baseHeader
         headers.add(.accept("application/vnd.github+json"))
-        // TODO: ??
-        headers.add(.authorization("token \(String(describing: KeychainManager.shared.getAuthToken()))"))
+        headers.add(.authorization(configuration.accessToken))
         
         return headers
       }
@@ -43,12 +52,12 @@ final class SearchRepositoriesService {
     
     var parameters: Parameters? {
       switch self {
-      case .findRepositories(let searchPath, let sortRepositoryResponse, let chunkAmount, let page):
+      case let .findRepositories(configuration):
         return [
-          "q": searchPath,
-          "page": page,
-          "per_page": chunkAmount,
-          "sort": sortRepositoryResponse.rawValue
+          "q": configuration.searchPath,
+          "page": configuration.page,
+          "per_page": configuration.chunkAmount,
+          "sort": configuration.sortRepositoryResponse.rawValue
         ]
       }
     }
@@ -69,7 +78,14 @@ final class SearchRepositoriesService {
   }
   
   func findRepositories(searchPath path: String, sort: SortRepositoryResponse, chuckAmount: Int, page: Int) -> Observable<RepositoryReponse> {
-    let service: SearchRepositoriesRequest = .findRepositories(path, sort, chuckAmount, page)
+    let configuration = SearchRepositoriesAPIConfiguration(
+      searchPath: path,
+      sortRepositoryResponse: sort,
+      chunkAmount: chuckAmount,
+      page: page,
+      accessToken: KeychainManager.shared.getAuthToken()
+    )
+    let service: SearchRepositoriesRequest = .findRepositories(configuration)
     
     return requestManager.perform(service: service, decodeType: RepositoryReponse.self)
   }

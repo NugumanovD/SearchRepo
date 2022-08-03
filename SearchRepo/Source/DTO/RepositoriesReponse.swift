@@ -29,6 +29,7 @@ struct Repository: Codable {
   let stargazersCount: Int
   let owner: Owner?
   let language: String?
+  var isViewed = false
   
   enum CodingKeys: String, CodingKey {
     
@@ -39,6 +40,14 @@ struct Repository: Codable {
     case language = "language"
     
   }
+}
+
+extension Repository: Hashable {
+  
+  static func == (lhs: Repository, rhs: Repository) -> Bool {
+    lhs.id == rhs.id
+  }
+  
 }
 
 // MARK: - OwnerClass
@@ -52,6 +61,14 @@ struct Owner: Codable {
     case avatarURL = "avatar_url"
     case htmlURL = "html_url"
   }
+}
+
+extension Owner: Hashable {
+  
+  static func == (lhs: Owner, rhs: Owner) -> Bool {
+    lhs.id == rhs.id
+  }
+  
 }
 
 extension Owner {
@@ -82,7 +99,7 @@ extension Owner {
 
 extension Repository {
   
-  func toRepositoryConfiguration(with context: NSManagedObjectContext) -> RepositoryConfiguration {
+  func toRepositoryConfiguration() -> RepositoryConfiguration {
     RepositoryConfiguration(
       id: id,
       title: fullName,
@@ -90,16 +107,8 @@ extension Repository {
       language: language,
       pageURLString: owner?.htmlURL ?? "https://github.com",
       avatarURLString: owner?.avatarURL,
-      viewed: isViewed(with: context)
+      viewed: isViewed
     )
-  }
-  
-  func isViewed(with context: NSManagedObjectContext) -> Bool {
-    let request = createFetchRequest(for: id)
-    
-    let viewed = try? context.fetch(request).first
-    
-    return viewed?.viewed ?? false
   }
   
   @discardableResult

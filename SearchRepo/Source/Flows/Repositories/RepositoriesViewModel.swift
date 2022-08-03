@@ -56,7 +56,6 @@ final class RepositoriesViewModel {
   
 }
 
-// TODO: - MOVE
 struct RepositoryConfiguration {
   
   var id: Int

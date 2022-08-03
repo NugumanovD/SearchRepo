@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 
 extension RepositoryEntity {
@@ -29,7 +30,20 @@ extension RepositoryEntity {
       fullName: fullName,
       stargazersCount: Int(stargazersCount),
       owner: ownerEntity?.convertToOwner(),
-      language: language
+      language: language,
+      isViewed: viewed
+    )
+  }
+  
+  func toRepositoryConfiguration() -> RepositoryConfiguration {
+    .init(
+      id: Int(id),
+      title: fullName,
+      stargazersCount: Int(stargazersCount),
+      language: language,
+      pageURLString: ownerEntity?.htmlURL,
+      avatarURLString: ownerEntity?.avatarURL,
+      viewed: viewed
     )
   }
 

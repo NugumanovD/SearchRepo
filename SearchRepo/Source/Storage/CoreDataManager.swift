@@ -63,6 +63,13 @@ final class CoreDataManager {
     return try mainManagedObjectContext.fetch(request).first
   }
   
+  func fetchAllRepositories() -> [RepositoryEntity]? {
+    let request: NSFetchRequest<RepositoryEntity> = RepositoryEntity.fetchRequest()
+    request.returnsObjectsAsFaults = false
+    
+    return try? mainManagedObjectContext.fetch(request)
+  }
+  
   private func setupCoreDataStack() {
     guard let persistentStoreCoordinator = mainManagedObjectContext.persistentStoreCoordinator else {
       fatalError("Unable to Set Up Core Data Stack")
@@ -85,13 +92,14 @@ final class CoreDataManager {
         NSInferMappingModelAutomaticallyOption : true
       ]
       
-      try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
-                                                        configurationName: nil,
-                                                        at: persistentStoreURL,
-                                                        options: options)
+      try persistentStoreCoordinator.addPersistentStore(
+        ofType: NSSQLiteStoreType,
+        configurationName: nil,
+        at: persistentStoreURL,
+        options: options
+      )
     } catch {
       fatalError("Unable to Add Persistent Store")
     }
   }
 }
-

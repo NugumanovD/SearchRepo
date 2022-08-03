@@ -45,7 +45,6 @@ final class SignInModel {
       .map { $0.accessToken }
       .subscribe { [weak self] accessToken in
         guard let accessToken = accessToken.element else {
-         // TODO: Need to show alert with Error
           return
         }
         self?.userSession.didSignInAction.onNext(accessToken)

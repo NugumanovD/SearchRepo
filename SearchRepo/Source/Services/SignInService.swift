@@ -9,7 +9,17 @@ import Alamofire
 import Foundation
 import RxSwift
 
-let scheme = "com.nugumanov.SearchRepo"
+enum SignInServiceConstants {
+  
+  static let getAuthPageUrl = "https://github.com/login/oauth/authorize"
+  static let signInURL = "https://github.com/login/oauth/access_token"
+  static let scheme = "com.nugumanov.SearchRepo"
+  static let clientID = {YOUR CLIENT_ID}
+  static let clientSecret = {YOUR CLIENT_SECRET}
+  
+}
+
+let scheme = SignInServiceConstants.scheme
 
 final class SignInService {
   
@@ -21,12 +31,10 @@ final class SignInService {
     var path: String {
       switch self {
       case .getAuthPageUrl:
-        // TODO: Movie to string store
-        return "https://github.com/login/oauth/authorize"
+        return SignInServiceConstants.getAuthPageUrl
         
       case .getAuthorizationToken:
-        // TODO: Movie to string store
-        return "https://github.com/login/oauth/access_token"
+        return SignInServiceConstants.signInURL
       }
     }
     
@@ -38,8 +46,7 @@ final class SignInService {
       switch self {
       case .getAuthPageUrl:
         return [
-          // TODO: Movie to string store
-          "client_id": "652035a8fdca5f5bf68d",
+          "client_id": SignInServiceConstants.clientID,
           "redirect_uri": "\(scheme)://authentication",
           "state": "state",
           "scope": ["repo", "user"].joined(separator: " ")
@@ -47,9 +54,8 @@ final class SignInService {
         
       case let .getAuthorizationToken(code):
         return [
-          // TODO: Movie to string store
-          "client_id": "652035a8fdca5f5bf68d",
-          "client_secret": "63f1120f662985267684926fe96a253071b9c5e7",
+          "client_id": SignInServiceConstants.clientID,
+          "client_secret": SignInServiceConstants.clientSecret,
           "code": code,
           "redirect_uri": "\(scheme)://authentication"
         ]

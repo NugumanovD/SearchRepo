@@ -39,7 +39,7 @@ class TabBarCoordinator: BaseCoordinator {
       selectedImage: UIImage(systemName: "person.3.fill")
     )
     
-    let historyModel = HistoryModel()
+    let historyModel = HistoryModel(coreDataManager: coreDataManager)
     let historyViewModel = HistoryViewModel(model: historyModel)
     let historyViewController = HistoryViewController()
     historyViewController.viewModel = historyViewModel
