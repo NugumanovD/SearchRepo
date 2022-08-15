@@ -49,6 +49,6 @@ extension RepositoryEntity {
 
 }
 
-extension RepositoryEntity : Identifiable {
+extension RepositoryEntity: Identifiable {
 
 }

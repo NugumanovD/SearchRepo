@@ -31,6 +31,6 @@ extension OwnerEntity {
 
 }
 
-extension OwnerEntity : Identifiable {
+extension OwnerEntity: Identifiable {
 
 }

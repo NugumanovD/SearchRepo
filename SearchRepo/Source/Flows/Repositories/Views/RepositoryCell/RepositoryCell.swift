@@ -33,8 +33,12 @@ final class RepositoryCell: UITableViewCell {
   }
   
   override func prepareForReuse() {
+    super.prepareForReuse()
+    
     avatarView.image = nil
     titleLabel.text = nil
+    starsImageView.image = nil
+    languageLabel.text = nil
   }
   
   private func setupView() {
@@ -97,7 +101,6 @@ final class RepositoryCell: UITableViewCell {
     )
     starsImageView.image = UIImage(named: "starsIcon")
     titleLabel.text = configuration.title
-    titleLabel.textColor = .red
     starsCountLabel.text = configuration.stargazersCount?.roundedWithAbbreviations
     languageLabel.text = configuration.language
     backgroundColor = configuration.viewed ? UIColor.systemMint : .white

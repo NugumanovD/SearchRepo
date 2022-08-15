@@ -16,6 +16,12 @@ enum SessionState {
   
 }
 
+protocol UserSessionServiceProvider {
+  
+  var didSignOutAction: PublishSubject<Void> { get }
+  
+}
+
 final class UserSessionService {
   
   var state = ReplaySubject<SessionState>.create(bufferSize: 1)
@@ -44,8 +50,9 @@ final class UserSessionService {
   }
   
   private func userSessionState() -> SessionState {
-    let state: SessionState = keychainManager.getAuthToken() != nil ? .authorize : .nonAuthorize
-    return state
+    keychainManager.getAuthToken() != nil ? .authorize : .nonAuthorize
   }
   
 }
+
+extension UserSessionService: UserSessionServiceProvider {}

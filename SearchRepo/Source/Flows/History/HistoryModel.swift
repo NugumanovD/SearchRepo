@@ -37,11 +37,9 @@ final class HistoryModel {
       .addObserver(for: NSManagedObjectContextChanges.self, object: self.coreDataManager.mainManagedObjectContext, queue: nil) { (changes) in
         var entity = RepositoryEntity()
         
-        if let repositoryEntityObject = changes.insertedObjects.first as? RepositoryEntity {
+        if let insertedObject = changes.insertedObjects.first(where: { $0 is RepositoryEntity }),
+           let repositoryEntityObject = insertedObject as? RepositoryEntity {
           entity = repositoryEntityObject
-        } else if let ownerObject = changes.insertedObjects.first as? OwnerEntity,
-                  let repository = ownerObject.repository {
-          entity = repository
         }
         
         self.presentableRepositories.acceptThanAppend(entity.toRepositoryConfiguration())

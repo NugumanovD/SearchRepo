@@ -12,7 +12,7 @@ final class AtomicInteger {
   private let lock = DispatchSemaphore(value: 1)
   private var _value: Int
   
-  public init(value initialValue: Int = 0) {
+  init(value initialValue: Int = 0) {
     _value = initialValue
   }
   

@@ -9,13 +9,13 @@ import RxSwift
 import RxRelay
 import Foundation
 import CoreData
-import Realm
-import RealmSwift
 
 enum AlertControllerString {
+  
   static let title = "Warning"
   static let message = "Unfortunately, the number of requests is limited. Try to execute the request after 30 seconds"
   static let buttonTitle = "Ok"
+  
 }
 
 fileprivate enum SourceRepositories {
@@ -44,21 +44,15 @@ final class RepositoriesModel {
   private let chuckAmount = 15
   private var isCatchError = false
   private let coordinator: TabBarCoordinator
-  private let repositoriesService: SearchRepositoriesService
-  private let userSession: UserSessionService
+  private let repositoriesService: SearchRepositoriesServiceProvider
+  private let userSession: UserSessionServiceProvider
   private let coreDataManager: CoreDataManager
   private let disposeBag = DisposeBag()
   
-  private let operationQueue: OperationQueue = {
-    let operationQueue = OperationQueue()
-    
-    return operationQueue
-  }()
-  
   init(
-    repositoriesService: SearchRepositoriesService,
+    repositoriesService: SearchRepositoriesServiceProvider,
     coordinator: TabBarCoordinator,
-    userSession: UserSessionService,
+    userSession: UserSessionServiceProvider,
     coreDataManager: CoreDataManager
   ) {
     self.repositoriesService = repositoriesService
@@ -75,11 +69,9 @@ final class RepositoriesModel {
       .addObserver(for: NSManagedObjectContextChanges.self, object: self.coreDataManager.mainManagedObjectContext, queue: nil) { (changes) in
         var entity = RepositoryEntity()
         
-        if let repositoryEntityObject = changes.insertedObjects.first as? RepositoryEntity {
+        if let insertedObject = changes.insertedObjects.first(where: { $0 is RepositoryEntity }),
+           let repositoryEntityObject = insertedObject as? RepositoryEntity {
           entity = repositoryEntityObject
-        } else if let ownerObject = changes.insertedObjects.first as? OwnerEntity,
-                  let repository = ownerObject.repository {
-          entity = repository
         }
         
         if let index = self.repositories.value.firstIndex(where: { $0.id == entity.id }) {
@@ -120,8 +112,10 @@ final class RepositoriesModel {
     logOutAction.bind(to: userSession.didSignOutAction).disposed(by: disposeBag)
     
     repositories
-      .map {
-        self.mergeWithStorageRepositories(sortedValues: $0)
+      .map { [weak self] in
+        guard let self = self else { return [RepositoryConfiguration]() }
+
+        return self.mergeWithStorageRepositories(sortedValues: $0)
           .map { $0.toRepositoryConfiguration() }
       }
       .bind(to: presentableRepositories)
@@ -153,7 +147,7 @@ final class RepositoriesModel {
     .disposed(by: disposeBag)
   }
   
-  func mergeWithStorageRepositories(sortedValues: [Repository]) -> [Repository] {
+  private func mergeWithStorageRepositories(sortedValues: [Repository]) -> [Repository] {
     guard let storageRepositories = self.coreDataManager.fetchAllRepositories(),
           !storageRepositories.isEmpty
     else { return sortedValues }
@@ -171,7 +165,7 @@ final class RepositoriesModel {
     return mergedArray
   }
   
-  func markAsViewedIfNeeded(with id: Int) {
+  private func markAsViewedIfNeeded(with id: Int) {
     if let _ = try? coreDataManager.find(id: id) {
       return
     }

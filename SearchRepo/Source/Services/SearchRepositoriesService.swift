@@ -22,7 +22,13 @@ struct SearchRepositoriesAPIConfiguration {
   let sortRepositoryResponse: SortRepositoryResponse
   let chunkAmount: Int
   let page: Int
-  let accessToken: String
+  let accessToken: String?
+  
+}
+
+protocol SearchRepositoriesServiceProvider {
+  
+  func findRepositories(searchPath path: String, sort: SortRepositoryResponse, chuckAmount: Int, page: Int) -> Observable<RepositoryReponse>
   
 }
 
@@ -44,7 +50,7 @@ final class SearchRepositoriesService {
       case let .findRepositories(configuration):
         var headers = baseHeader
         headers.add(.accept("application/vnd.github+json"))
-        headers.add(.authorization(configuration.accessToken))
+        headers.add(.authorization(configuration.accessToken ?? ""))
         
         return headers
       }
@@ -91,3 +97,5 @@ final class SearchRepositoriesService {
   }
   
 }
+
+extension SearchRepositoriesService: SearchRepositoriesServiceProvider {}

@@ -12,7 +12,6 @@ import RxSwift
 class AppCoordinator: BaseCoordinator {
   
   lazy var window = UIWindow(frame: UIScreen.main.bounds)
-  /// An object of this class is created in the AppDelegate, uses implicit initialization of the AppCoordinator class
   var deepLinkHandler: DeepLinkHandler!
   
   private let userSession = UserSessionService()
